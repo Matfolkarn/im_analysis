@@ -23,7 +23,7 @@
 mysystem.segmenter = 'im2segment'; % What is the name of your segmentation-algorithm.
 
 %% Choose dataset
-datadir = '../ocr_project/datasets/short1';     % Which folder of examples are you going to test it on
+datadir = '../datasets/short1';     % Which folder of examples are you going to test it on
 
 %% Benchmark and visualize
 mode = 2; % debug mode with the most plots

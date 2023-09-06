@@ -1,27 +1,23 @@
-r_space = linspace(0,1,1000);
+r_space = linspace(0,1,100);
 
 pr = 6.*r_space.*(1-r_space);
-prr = @(r) 6*r*(1-r);
-
 nexttile
 plot(pr);
 title('pr')
 
-h = histogram(pr, 100);
+h = hist(pr, 20);
 
-disp(h)
-
-T = cumsum(pr);
-
+T = cumsum(h);
+disp(T);
 nexttile
-disp(sum(T))
 
 plot(T);
 title('T')
+disp(siz)
 
 ps = pr.*T;
 nexttile
 
-
+disp(ps);
 plot(ps);
 title('ps')
