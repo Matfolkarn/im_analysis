@@ -14,11 +14,4 @@ end
 
 subplot(2,4,1)
 plot(im)
-subplot(2,4,2)
-plot(S{1})
-subplot(2,4,3)
-plot(S{2})
-subplot(2,4,4)
-plot(S{3})
-subplot(2,4,5)
-plot(S{4})
+subplot(2,4,1)
