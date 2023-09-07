@@ -1,19 +1,16 @@
 
-x = linspace(0,1, 1000);
+x = linspace(0,1, 10);
 prr =6.*x.*(1-x);
 
 subplot(2,3,1)
-h = histogram(prr, 100);
+plot( prr) 
 
-disp(h.Values)
-
-
-T = cumsum(h.Values)/1000
+T = cumsum(prr)/1000;
 
 subplot(2,3,2)
 plot( T) 
 
-ps = T.*h;
+ps = T.*prr;
 
 subplot(2,3,3)
 plot(ps)

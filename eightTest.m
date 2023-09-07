@@ -16,10 +16,10 @@ function [projection, r] = eight(image, e1, e2, e3, e4)
 
 im = image;
 
-x1 = im.*e1;
-x2 = im.*e2;
-x3 = im.*e3;
-x4 = im.*e4;
+x1 = sum(im.*e1,"all");
+x2 = sum(im.*e2,"all");
+x3 = sum(im.*e3,"all");
+x4 = sum(im.*e4,"all");
 
 projection = x1.*e1 + x2.*e2 + x3 .*e3 + x4.*e4;
 r = abs(im - projection);
