@@ -1,10 +1,6 @@
 
-x = linspace(0,1, 10);
+x = linspace(0,1, 1000);
 prr =6.*x.*(1-x);
-
-subplot(2,3,1)
-plot( prr) 
-
 T = cumsum(prr)/1000;
 
 subplot(2,3,2)
