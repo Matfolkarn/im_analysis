@@ -1,0 +1,6 @@
+function nr = nrow(mat)
+h = height(mat);
+disp(h)
+for i = 1:
+nr = s;
+end
