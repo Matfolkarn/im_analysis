@@ -12,31 +12,23 @@ function features = segment2features(I)
 
 
 %imshow(I);
-disp("BBBBBBBBBBBB")
 im = I;
-disp("BBBBBBBBBBBB")
-S = im2segment(im);
-disp("im2segment(im)")
-disp(class(S));
-disp("BBBBBBBBBBBB")
-B = double(cell2mat(S));
-disp("double(cell2mat(S)")
 
+%S = im2segment(im);
+S = im;
+
+%B = double(cell2mat(S));
+B = S;
 
 
 
 feat1 = nrow(B);
-disp("1")
 feat2 = ncol(B);
-disp("2")
 [feat3, feat4] = heightwidth(B);
-disp("34")
 feat5 = centroidy(B);
-disp("5")
 feat6 = centroidx(B);
-disp("6")
 %disp(feat3)
 %disp(feat4)
-features = [0.5, 0.7,0.5, 0.7,0.5, 0.7];
+features = [feat3, feat4,feat5, feat6];
 %disp(feat5)
 %disp(feat6)

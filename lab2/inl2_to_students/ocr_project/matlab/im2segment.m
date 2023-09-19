@@ -11,9 +11,8 @@ sbw = bwlabel(mod,8);
 nrseg = max(sbw(:));
 S = cell(1,nrseg);
 
-%disp(sbw == 1)
-
 for kk = 1:nrseg
     S{kk}= (sbw==kk); 
+    
 end
 
