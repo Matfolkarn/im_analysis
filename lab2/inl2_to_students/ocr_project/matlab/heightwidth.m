@@ -28,4 +28,5 @@ tot_ones = sum(sum(mat));
 density = tot_ones/(wid*hei);
 
 %DENSITY
-ratio = hei/wid;
+% /ROWN -> NORMALIZE
+ratio = (hei/wid)/rown;
