@@ -64,6 +64,7 @@ for ii=1:length(a)
         for kk = 1:nrofsegments
             if all(size(S{kk}) == size(im))
                 FG_system = FG_system | S{kk};
+              
             else
                 disp('There is something wrong with the size of the output');
                 disp('Each segment S{k} should have the same size as the original image.');

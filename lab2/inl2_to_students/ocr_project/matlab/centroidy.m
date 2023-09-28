@@ -1,9 +1,8 @@
-function cy = centroidy(mat)
-h = height(mat);
+function cy = centroidy(mat, ymin, ymax)
 result = 0;
-for i = 1:h
-    %NORMALIZE WITH (I/h)
-    result  = result + (i/h)*sum(mat(i,:));
-end 
 tot_ones = sum(sum(mat));
-cy = result/ tot_ones;
+delta = ymax - ymin;
+for i = ymin:ymax
+    result  = result + ((i -ymin))*sum(mat(i,:)/tot_ones);
+end 
+cy = result/delta;

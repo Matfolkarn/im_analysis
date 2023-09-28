@@ -1,34 +1,28 @@
 function features = segment2features(I)
-% features = segment2features(I)
+c = centerim(I);
 
-%number of pixels on row
-%number of pixels on column
-%height/width || normalize with height*width or total height/width?
-%nr pixels in square of picture?
-%centroid x?
-%centroid y?
+%Width
+[xmax, xmin, ymax, ymin, wid] = heightwidth(c);
 
-%nr corners? smoothing filter?
+%Centroidx and Centroidy
+feat5 = centroidy(c, ymin, ymax);
+feat6 = centroidx(c, xmin, xmax);
 
+%Eccentrity
+stats = regionprops(I, 'Eccentricity');
+eccentricityValue = stats(1).Eccentricity;
 
-%imshow(I);
-im = I;
+%perimeter
+perimeterImage = bwperim(I);
+totalPerimeter = sum(perimeterImage(:));
 
-%S = im2segment(im);
-S = im;
+%Euler
+eu = bweuler(I);
+eu_norm = (eu + 1)/2;
 
-%B = double(cell2mat(S));
-B = S;
+%Perimeter
+tot_ones = sum(sum(I));
+normalizedPerimeter = totalPerimeter / tot_ones;
 
+features = [eu_norm, wid, feat5, feat6, eccentricityValue, normalizedPerimeter];
 
-
-feat1 = nrow(B);
-feat2 = ncol(B);
-[feat3, feat4] = heightwidth(B);
-feat5 = centroidy(B);
-feat6 = centroidx(B);
-%disp(feat3)
-%disp(feat4)
-features = [feat3, feat4,feat5, feat6];
-%disp(feat5)
-%disp(feat6)

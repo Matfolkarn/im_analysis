@@ -1,9 +1,8 @@
-function cx = centroidx(mat)
-[rownum,column]=size(mat);
+function cx = centroidx(mat, xmin, xmax)
 result = 0;
-for i = 1:column
-    %NORMALIZE WITH (I/column)
-    result  = result + (i/column)*sum(mat(:,i));
-end 
+delta = xmax -xmin;
 tot_ones = sum(sum(mat));
-cx = result/ tot_ones;
+for i = xmin:xmax
+    result  = result + (i - xmin)*sum(mat(:,i)/tot_ones);
+end 
+cx = result/delta;

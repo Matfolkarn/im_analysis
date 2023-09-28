@@ -6,9 +6,10 @@ for nstack = 1:2
         for kk = 1:length(stacks{nstack})
             curimg = stacks{nstack}(:,:,kk);
             [projection, r] = eight(curimg, bases{base}(:,:,1), bases{base}(:,:,2), bases{base}(:,:,3), bases{base}(:,:,4));
-            error = error + r;
+            error = error + abs(curimg - projection);
         end
-        disp(sum(error, "all")/length(stacks{1}));
+        average_error = sqrt(sum(error.*error,"all"))/400
+        disp(average_error);
     end 
 end
 
