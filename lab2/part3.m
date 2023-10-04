@@ -54,7 +54,7 @@ disp(zero/ (B + zero + eight))
 disp(eight/ (B + zero + eight))
 
 %% Part 4 
-eps = 0.4;
+eps = 0.1;
 ca1 = 1/4 *(eps)*(1-eps)^3;
 ca2 = 1/2 *(eps^3)*(1-eps);
 ca3 = 1/4*(eps^2)*(1-eps)^2;

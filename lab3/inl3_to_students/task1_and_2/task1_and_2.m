@@ -28,29 +28,29 @@ for i = 1 : nbr_trials
     
     % Extract training and test data given the partition above
     X_train = X(:, part.training);
-    %X_test = FILL IN
-    %Y_train = FILL IN
-    %Y_test = FILL IN
+    X_test = X(:, part.test);
+    Y_train = Y(:, part.training);
+    Y_test = Y(:, part.test);
     nbr_train_examples = length(Y_train);
     nbr_test_examples = length(Y_test);
     
     % Now we can train our model!
     % YOU SHOULD IMPLEMENT THE FUNCTION class_train!
-    classification_data = class_train(X_train, Y_train);
+    [classification_data_x, classification_data_y] = class_train(X_train, Y_train);
         
     % Next, let's use our trained model to classify the examples in the 
     % test data
     predictions_test = zeros(1, nbr_test_examples);
     for j = 1 : nbr_test_examples
         % YOU SHOULD IMPLEMENT THE FUNCTION classify!
-        predictions_test(j) = classify(X_test(:, j), classification_data);
+        predictions_test(j) = classify(X_test(:, j), classification_data_x, classification_data_y );
     end
    
     % We do the same thing again but this time for the training data itself!
     predictions_train = zeros(1, nbr_train_examples);
     for j = 1 : nbr_train_examples
         % YOU SHOULD IMPLEMENT THE FUNCTION classify!
-        predictions_train(j) = classify(X_train(:, j), classification_data);
+        predictions_train(j) = classify(X_train(:, j), classification_data_x, classification_data_y );
     end
     
     % We can now proceed to computing the respective error rates.
@@ -74,24 +74,31 @@ for i = 1 : nbr_trials
     % RESULTS
     
     % Train built-in functions (don't forget: transpose as necessary)
-    tree_model % = FILL IN
-    svm_model % = FILL IN
-    nn_model % = FILL IN 
+    x_transposed = transpose(X_train);
+    y_transposed = transpose(Y_train);
+
+    x_test_transposed = transpose(X_test);
+    y_test_transposed = transpose(Y_test);
+
+    tree_model = fitctree(x_transposed,y_transposed);
+    svm_model = fitcsvm(x_transposed,y_transposed);
+    nn_model = fitcknn(x_transposed,y_transposed);
     
     % Next, let's use our trained model to classify the examples in the 
     % test data. You should look up the function "predict" in Matlab!
     % (don't forget: transpose as necessary, both for X and Y)
-    predictions_test_tree % = FILL IN
-    predictions_test_svm % = FILL IN
-    predictions_test_nn % = FILL IN
+    predictions_test_tree = predict(tree_model, x_test_transposed);
+    predictions_test_svm = predict(svm_model, x_test_transposed);
+    predictions_test_nn = predict(nn_model, x_test_transposed);
    
     % We can now proceed to computing the respective error rates.
-    pred_test_diff_tree = predictions_test_tree - Y_test;
-    pred_test_diff_svm % = FILL IN
-    pred_test_diff_nn % = FILL IN
-    err_rate_test_tree % = FILL IN
-    err_rate_test_svm % = FILL IN
-    err_rate_test_nn % = FILL IN
+    pred_test_diff_tree = predictions_test_tree - y_test_transposed;
+    pred_test_diff_svm =predictions_test_svm - y_test_transposed;
+    pred_test_diff_nn = predictions_test_nn - y_test_transposed;
+    err_rate_test_tree = nnz(pred_test_diff_tree);
+    err_rate_test_svm  =  nnz(pred_test_diff_svm);
+    err_rate_test_nn  = nnz(pred_test_diff_nn);
+    
     
     % Store them in the containers
     err_rates_test(i, 2) = err_rate_test_tree;
@@ -100,6 +107,23 @@ for i = 1 : nbr_trials
     
     % Let's do the same for the training data
     % FILL IN CODE SIMILAR TO THE TEST PART ABOVE!
+
+    predictions_test_tree = predict(tree_model, x_transposed);
+    predictions_test_svm = predict(svm_model, x_transposed);
+    predictions_test_nn = predict(nn_model, x_transposed);
+
+    pred_test_diff_tree = predictions_test_tree - y_transposed;
+    pred_test_diff_svm = predictions_test_svm - y_transposed;
+    pred_test_diff_nn = predictions_test_nn - y_transposed;
+   
+    err_rate_test_tree = nnz(pred_test_diff_tree);
+    err_rate_test_svm  =  nnz(pred_test_diff_svm);
+    err_rate_test_nn  = nnz(pred_test_diff_nn);
+
+    err_rates_train(i, 2) = err_rate_test_tree;
+    err_rates_train(i, 3) = err_rate_test_svm;
+    err_rates_train(i, 4) = err_rate_test_nn;
+
 end
 
 % Finally, after all the trials are done, report mean error rates

@@ -9,5 +9,7 @@ x4 = sum(im.*e4,"all");
 
 projection = x1.*e1 + x2.*e2 + x3 .*e3 + x4.*e4;
 image(projection);
-r = abs(im - projection);
+norm_proj = norm(projection);
+norm_img = norm(imag);
+r = abs(norm_img - norm_proj);
 end

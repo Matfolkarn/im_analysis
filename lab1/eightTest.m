@@ -6,10 +6,9 @@ for nstack = 1:2
         for kk = 1:length(stacks{nstack})
             curimg = stacks{nstack}(:,:,kk);
             [projection, r] = eight(curimg, bases{base}(:,:,1), bases{base}(:,:,2), bases{base}(:,:,3), bases{base}(:,:,4));
-            error = error + abs(curimg - projection);
+            error = error + r;
         end
-        average_error = sqrt(sum(error.*error,"all"))/400
-        disp(average_error);
+        average_error = error/400
     end 
 end
 
@@ -32,5 +31,7 @@ x3 = sum(im.*e3,"all");
 x4 = sum(im.*e4,"all");
 
 projection = x1.*e1 + x2.*e2 + x3 .*e3 + x4.*e4;
-r = abs(im - projection);
+norm_proj = norm(projection);
+norm_img = norm(image);
+r = abs(norm_img - norm_proj);
 end
