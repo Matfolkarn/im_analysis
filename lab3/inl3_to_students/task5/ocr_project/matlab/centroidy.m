@@ -5,4 +5,4 @@ delta = ymax - ymin;
 for i = ymin:ymax
     result  = result + ((i -ymin))*sum(mat(i,:)/tot_ones);
 end 
-cy = result/(delta);
+cy = result/delta;

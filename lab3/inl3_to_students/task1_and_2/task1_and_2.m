@@ -74,15 +74,15 @@ for i = 1 : nbr_trials
     % RESULTS
     
     % Train built-in functions (don't forget: transpose as necessary)
-    x_transposed = transpose(X_train);
-    y_transposed = transpose(Y_train);
+    x_train_transposed = transpose(X_train);
+    y_train_transposed = transpose(Y_train);
 
     x_test_transposed = transpose(X_test);
     y_test_transposed = transpose(Y_test);
 
-    tree_model = fitctree(x_transposed,y_transposed);
-    svm_model = fitcsvm(x_transposed,y_transposed);
-    nn_model = fitcknn(x_transposed,y_transposed);
+    tree_model = fitctree(x_train_transposed,y_train_transposed);
+    svm_model = fitcsvm(x_train_transposed,y_train_transposed);
+    nn_model = fitcknn(x_train_transposed,y_train_transposed);
     
     % Next, let's use our trained model to classify the examples in the 
     % test data. You should look up the function "predict" in Matlab!
@@ -95,9 +95,10 @@ for i = 1 : nbr_trials
     pred_test_diff_tree = predictions_test_tree - y_test_transposed;
     pred_test_diff_svm =predictions_test_svm - y_test_transposed;
     pred_test_diff_nn = predictions_test_nn - y_test_transposed;
-    err_rate_test_tree = nnz(pred_test_diff_tree);
-    err_rate_test_svm  =  nnz(pred_test_diff_svm);
-    err_rate_test_nn  = nnz(pred_test_diff_nn);
+    
+    err_rate_test_tree = nnz(pred_test_diff_tree)/nbr_test_examples;
+    err_rate_test_svm  =  nnz(pred_test_diff_svm)/nbr_test_examples;
+    err_rate_test_nn  = nnz(pred_test_diff_nn)/nbr_test_examples;
     
     
     % Store them in the containers
@@ -108,21 +109,21 @@ for i = 1 : nbr_trials
     % Let's do the same for the training data
     % FILL IN CODE SIMILAR TO THE TEST PART ABOVE!
 
-    predictions_test_tree = predict(tree_model, x_transposed);
-    predictions_test_svm = predict(svm_model, x_transposed);
-    predictions_test_nn = predict(nn_model, x_transposed);
+    predictions_train_tree = predict(tree_model, x_train_transposed);
+    predictions_train_svm = predict(svm_model, x_train_transposed);
+    predictions_train_nn = predict(nn_model, x_train_transposed);
 
-    pred_test_diff_tree = predictions_test_tree - y_transposed;
-    pred_test_diff_svm = predictions_test_svm - y_transposed;
-    pred_test_diff_nn = predictions_test_nn - y_transposed;
+    pred_train_diff_tree = predictions_train_tree - y_train_transposed;
+    pred_train_diff_svm = predictions_train_svm - y_train_transposed;
+    pred_train_diff_nn = predictions_train_nn - y_train_transposed;
    
-    err_rate_test_tree = nnz(pred_test_diff_tree);
-    err_rate_test_svm  =  nnz(pred_test_diff_svm);
-    err_rate_test_nn  = nnz(pred_test_diff_nn);
+    err_rate_train_tree = nnz(pred_train_diff_tree) /nbr_train_examples;
+    err_rate_train_svm  =  nnz(pred_train_diff_svm) /nbr_train_examples;
+    err_rate_train_nn  = nnz(pred_train_diff_nn) /nbr_train_examples;
 
-    err_rates_train(i, 2) = err_rate_test_tree;
-    err_rates_train(i, 3) = err_rate_test_svm;
-    err_rates_train(i, 4) = err_rate_test_nn;
+    err_rates_train(i, 2) = err_rate_train_tree;
+    err_rates_train(i, 3) = err_rate_train_svm;
+    err_rates_train(i, 4) = err_rate_train_nn;
 
 end
 

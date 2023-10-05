@@ -5,4 +5,4 @@ tot_ones = sum(sum(mat));
 for i = xmin:xmax
     result  = result + (i - xmin)*sum(mat(:,i)/tot_ones);
 end 
-cx = result/(delta);
+cx = result/delta;

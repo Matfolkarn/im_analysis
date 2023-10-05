@@ -21,14 +21,15 @@ x_fine = [min(xm)-0.05,max(xm)+0.05]; % used when plotting the fitted lines
 % Fit a line to these data points with total least squares
 % Here you should write code to obtain the p_ls coefficients (assuming the
 % line has the form y = p_ls(1) * x + p_ls(2)).
-p_ls = [rand(), 6]; % REMOVE AND REPLACE WITH TOTAL LEAST SQUARES SOLUTION
+%p_ls = [rand(), 6]; % REMOVE AND REPLACE WITH TOTAL LEAST SQUARES SOLUTION
+p_ls = least_squares(xm,ym);
 plot(x_fine, p_ls(1) * x_fine + p_ls(2))
 
 % Fit a line to these data points using RANSAC and total least squares on the inlier set.
 
 
 
-p_ransac = [rand(), 6]; % REMOVE AND REPLACE WITH RANSAC SOLUTION
+p_ransac = ransac(xm,ym); % REMOVE AND REPLACE WITH RANSAC SOLUTION
 plot(x_fine, p_ransac(1) * x_fine + p_ransac(2), 'k--')
 
 % Legend --> show which line corresponds to what (if you need to
