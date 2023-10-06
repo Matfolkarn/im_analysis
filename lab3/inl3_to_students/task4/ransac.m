@@ -1,3 +1,5 @@
+
+
 function line = ransac(xpoints, ypoints)
 
 points = [xpoints', ypoints'];

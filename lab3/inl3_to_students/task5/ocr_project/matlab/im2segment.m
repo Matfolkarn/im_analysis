@@ -8,6 +8,7 @@ mod = bwareaopen(threshim,30);
 
 sbw = bwlabel(mod,8);
 
+
 nrseg = max(sbw(:));
 S = cell(1,nrseg);
 

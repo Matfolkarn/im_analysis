@@ -7,7 +7,7 @@ clearvars;
 load('../task1_and_2/FaceNonFace.mat');
 nbr_examples = length(Y);
 
-nbr_trials = 25;
+nbr_trials = 100;
 err_rates_test = zeros(nbr_trials,1);
 err_rates_train = zeros(nbr_trials, 1);
 

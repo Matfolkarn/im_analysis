@@ -19,7 +19,7 @@ wid = col1_sorted(end) - col1_sorted(1);
 hei = row1_sorted(end) - row1_sorted(1);
 
 
-widd = (wid-2)/18;
+widd = (wid-2)/28;
 
 xmax = col1_sorted(end);
 xmin = col1_sorted(1);

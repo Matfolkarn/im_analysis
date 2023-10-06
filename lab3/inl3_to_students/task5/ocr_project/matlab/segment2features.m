@@ -1,6 +1,7 @@
 function features = segment2features(I)
-c = centerim(I);
-
+eu_img = bwmorph(I,'fill');
+c = eu_img%centerim(eu_img);
+[m,n] = size(I)
 %Width
 [xmax, xmin, ymax, ymin, wid] = heightwidth(c);
 
@@ -21,15 +22,14 @@ eu_img = bwmorph(I,'fill');
 
 
 eu = bweuler(eu_img);
-eu_norm = (eu + 1.5)/2.5;
+eu_norm = (eu + 1.5)/1.5;
 
 %Perimeter
 tot_ones = sum(sum(I));
-normalizedPerimeter = totalPerimeter / tot_ones;
+normalizedPerimeter = totalPerimeter / (m*n);
 
-
-%Average width
 
 
 features = [eu_norm, wid, feat5, feat6, eccentricityValue, normalizedPerimeter];
+
 
