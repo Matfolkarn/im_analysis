@@ -18,7 +18,7 @@ nbr_examples = length(Y);
 % This outer loop will run 100 times, so that you get a mean error for your
 % classifier (the error will become different each time due to the
 % randomness of cvpartition, which you may verify if you wish).
-nbr_trials = 100;
+nbr_trials = 1;
 err_rates_test = zeros(nbr_trials, 4);
 err_rates_train = zeros(nbr_trials, 4);
 for i = 1 : nbr_trials
@@ -151,10 +151,20 @@ mean_err_rate_train = mean(err_rates_train, 1)
 % not certain of course. Make sure that the two images are extracted from
 % X_test, and not X_train. Write code for this below! 
 
-IF = X_test(:,4);
-INF = X_test(:,5);
-Face = reshape(IF,19,19);
-NonFace = reshape(INF,19,19);
+face_index = find(Y_test == 1, 1);
+non_face_index = find(Y_test == -1, 1);
+face_image = reshape(X_test(:, face_index), 19, 19);
+non_face_image = reshape(X_test(:, non_face_index), 19, 19);
 
-imagesc(Face)
-%imagesc(NonFace)
+predicted_face = classify(X_test(:, face_index), classification_data_x, classification_data_y);
+predicted_non_face = classify(X_test(:, non_face_index), classification_data_x, classification_data_y);
+
+subplot(1, 2, 1);
+imagesc(face_image);
+title(['Predicted: ', num2str(predicted_face)]);
+
+subplot(1, 2, 2);
+imagesc(non_face_image);
+title(['Predicted: ', num2str(predicted_non_face)]);
+
+colormap gray;

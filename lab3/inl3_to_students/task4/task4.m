@@ -15,7 +15,7 @@ N = length(xm); % number of data points
 plot(xm, ym, '*'); hold on;
 xlabel('x') 
 ylabel('y')
-title('CHOOSE-APPROPRIATE-TITLE-FOR-REPORT!') % OBS - CHANGE TITLE!
+title('Datapoints with Ransac and TLS line') % OBS - CHANGE TITLE!
 x_fine = [min(xm)-0.05,max(xm)+0.05]; % used when plotting the fitted lines
 
 % Fit a line to these data points with total least squares
@@ -49,3 +49,12 @@ set(h, 'Position', rect)
 % errors!
 
 % WRITE CODE BELOW TO COMPUTE THE 4 ERRORS
+disp('LS Error Ransac')
+disp(p_ransac(3))
+disp("TLS Error Ransac")
+disp(p_ransac(4))
+disp("LS error TLS")
+disp(p_ls(3))
+disp("TLS error TLS")
+disp(p_ls(4))
+
