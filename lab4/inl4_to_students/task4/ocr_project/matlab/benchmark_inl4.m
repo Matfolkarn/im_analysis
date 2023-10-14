@@ -124,6 +124,10 @@ for ii=1:length(a)
         %%
         % classify
         for kk = 1:nrofsegments
+            disp(mysystem.classification_data)
+            disp(size(mysystem.classification_data))
+            disp(mysystem.classification_data(1))
+            disp(class(mysystem.classification_data))
             y(1,kk) = feval(mysystem.classifier,f(:,kk),mysystem.classification_data);
             guess(1,kk)=alfabet(y(1,kk));
         end

@@ -1,7 +1,22 @@
 function features = segment2features(I)
 eu_img = bwmorph(I,'fill');
-c = eu_img%centerim(eu_img);
-[m,n] = size(I)
+[m,n] = size(eu_img);
+
+%Center image
+%props = regionprops(eu_img, 'Centroid');
+%centerOfMass = props.Centroid;
+%translationVector = [n/2 - centerOfMass(1), m/2 - centerOfMass(2)];
+%translatedImage = imtranslate(eu_img, translationVector, 'OutputView', 'full');
+%c = translatedImage;
+
+
+%Crop image
+stats = regionprops(eu_img, 'BoundingBox');
+BB = stats.BoundingBox;
+c = imcrop(I, [BB(1), BB(2), BB(3), BB(4)]);
+
+[m,n] = size(c);
+
 %Width
 [xmax, xmin, ymax, ymin, wid] = heightwidth(c);
 
@@ -10,26 +25,26 @@ feat5 = centroidy(c, ymin, ymax);
 feat6 = centroidx(c, xmin, xmax);
 
 %Eccentrity
-stats = regionprops(I, 'Eccentricity');
-eccentricityValue = stats(1).Eccentricity;
-
+stats = regionprops(c, 'Eccentricity', 'EulerNumber');
+eccentricityValue = stats.Eccentricity;
+eulernumber = stats.EulerNumber;
 %perimeter
-perimeterImage = bwperim(I);
+perimeterImage = bwperim(c);
 totalPerimeter = sum(perimeterImage(:));
 
 %Euler
-eu_img = bwmorph(I,'fill');
-
-
-eu = bweuler(eu_img);
-eu_norm = (eu + 1.5)/1.5;
+%eu_img = bwmorph(I,'fill');
+%eu = bweuler(c);
+%eu_norm = (eu + 1.5)/1.5;
 
 %Perimeter
-tot_ones = sum(sum(I));
+tot_ones = sum(sum(c));
 normalizedPerimeter = totalPerimeter / (m*n);
 
+%Proportion of white pixels
 
 
-features = [eu_norm, wid, feat5, feat6, eccentricityValue, normalizedPerimeter];
+
+features = [eulernumber, wid, feat5, feat6, eccentricityValue, normalizedPerimeter];
 
 

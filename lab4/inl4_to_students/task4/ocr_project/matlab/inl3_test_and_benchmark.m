@@ -1,6 +1,6 @@
 % Prior to running this, make sure you follow the steps / launch the script
 % in 'first_steps_handin3_task4.m'.
-
+first_steps_handin3_task4
 % Setup the names of the functions of your OCR system. Make sure that all
 % of them reside in this same folder of course!
 mysystem.segmenter = 'im2segment'; % What is the name of your segmentation-algorithm?
